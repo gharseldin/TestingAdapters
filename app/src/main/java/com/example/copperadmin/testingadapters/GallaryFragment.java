@@ -34,7 +34,7 @@ public class GallaryFragment extends Fragment {
     private String mJsonString;
     private ArrayList<String> mUrls;
 
-    private static final String url = "https://api.instagram.com/v1/tags/selfie/media/recent?&access_token=1460323222.858d928.3b9e24a3be9e4278b9cd73e120044e0a";
+    private static final String url = "https://api.instagram.com/v1/tags/selfie/media/recent?&count=100&access_token=1460323222.858d928.3b9e24a3be9e4278b9cd73e120044e0a";
 
     public GallaryFragment() {
         // Required empty public constructor
@@ -74,6 +74,7 @@ public class GallaryFragment extends Fragment {
             }
         });
 
+        request.setTag(this);
         VolleyApplication.getInstance().getRequestQueue().add(request);
     }
     @Override
@@ -114,11 +115,15 @@ public class GallaryFragment extends Fragment {
 
             Picasso.with(getActivity())
                     .load(url)
-                    .noFade()
                     .into(imageView);
            return convertView;
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        VolleyApplication.getInstance().getRequestQueue().cancelAll(this);
+    }
 
 }
