@@ -1,0 +1,2 @@
+include ':app', ':volley', ':gson-2.3', ':picasso-2.3.4'
+project(':volley').projectDir = new File('Libraries/volley')
