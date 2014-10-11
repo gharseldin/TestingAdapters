@@ -30,7 +30,7 @@ public class PictureLab {
         return mPictureUrls;
     }
 
-    public void setPictureUrls(ArrayList<String> pictureUrls) {
-        mPictureUrls = pictureUrls;
+    public void addPictureUrls(ArrayList<String> pictureUrls) {
+        mPictureUrls.addAll(pictureUrls);
     }
 }

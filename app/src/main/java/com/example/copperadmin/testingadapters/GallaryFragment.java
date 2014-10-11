@@ -107,7 +107,7 @@ public class GallaryFragment extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
 
-                mPictureLab.setPictureUrls(gson.fromJson(response.toString(),ArrayList.class));
+                mPictureLab.addPictureUrls(gson.fromJson(response.toString(),ArrayList.class));
                 Log.d("***","Size = "+mPictureLab.getPictureUrls().size());
                 setupAdapter();
 
