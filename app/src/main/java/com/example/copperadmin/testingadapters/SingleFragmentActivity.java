@@ -19,9 +19,7 @@ public abstract class SingleFragmentActivity extends ActionBarActivity {
 
 
         FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = new Fragment();
-
-        fragment = fm.findFragmentById(R.id.fragmentContainer);
+        Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
 
         if(fragment==null){
             fragment = createFragment();
@@ -29,7 +27,4 @@ public abstract class SingleFragmentActivity extends ActionBarActivity {
 
         }
     }
-
-
-
 }
