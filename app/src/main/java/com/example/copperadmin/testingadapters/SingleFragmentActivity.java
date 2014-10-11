@@ -1,7 +1,8 @@
 package com.example.copperadmin.testingadapters;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,7 +19,7 @@ public abstract class SingleFragmentActivity extends ActionBarActivity {
         setContentView(R.layout.activity_single_fragment);
 
 
-        FragmentManager fm = getSupportFragmentManager();
+        FragmentManager fm = getFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
 
         if(fragment==null){

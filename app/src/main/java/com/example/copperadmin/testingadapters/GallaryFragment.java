@@ -1,9 +1,8 @@
 package com.example.copperadmin.testingadapters;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -68,6 +67,7 @@ public class GallaryFragment extends Fragment {
         updatePhotos(url);
 
         Intent i = new Intent(getActivity(), PollService.class);
+
         getActivity().startService(i);
 
     }
@@ -82,6 +82,7 @@ public class GallaryFragment extends Fragment {
             @Override
             public void onRefresh() {
                 updatePhotos(url);
+                mSwipeRefreshLayout.setRefreshing(false);
             }
         });
 
