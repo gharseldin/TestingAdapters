@@ -61,8 +61,6 @@ public class ImagePagingFragment extends Fragment {
                 .load(mUrls.get(mPosition))
                 .into(mPictureImageView);
 
-
-
         return v;
     }
 
