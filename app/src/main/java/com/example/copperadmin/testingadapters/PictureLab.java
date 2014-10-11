@@ -1,6 +1,7 @@
 package com.example.copperadmin.testingadapters;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -30,7 +31,15 @@ public class PictureLab {
         return mPictureUrls;
     }
 
-    public void setPictureUrls(ArrayList<String> pictureUrls) {
-        mPictureUrls = pictureUrls;
+    public void addPictureUrls(ArrayList<String> pictureUrls) {
+
+        ArrayList<String> reverseOrder = new ArrayList<String>();
+        for(int i=pictureUrls.size()-1; i>0;i--){
+            reverseOrder.add(pictureUrls.get(i));
+        }
+
+        reverseOrder.addAll(mPictureUrls);
+        mPictureUrls = reverseOrder;
+
     }
 }

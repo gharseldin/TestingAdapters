@@ -1,9 +1,9 @@
 package com.example.copperadmin.testingadapters;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -33,7 +33,8 @@ import java.util.ArrayList;
  */
 public class GallaryFragment extends Fragment {
 
-    GridView mGridView;
+    private GridView mGridView;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     private Gson gson;
     private PictureLab mPictureLab;
 
@@ -52,9 +53,6 @@ public class GallaryFragment extends Fragment {
         return fragment;
     }
 
-
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +67,7 @@ public class GallaryFragment extends Fragment {
         updatePhotos(url);
 
         Intent i = new Intent(getActivity(), PollService.class);
+
         getActivity().startService(i);
 
     }
@@ -78,6 +77,15 @@ public class GallaryFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_gallary, container, false);
         mGridView = (GridView)v.findViewById(R.id.gridView);
+        mSwipeRefreshLayout = (SwipeRefreshLayout)v.findViewById(R.id.swipeContainer);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                updatePhotos(url);
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
         setupAdapter();
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -107,7 +115,7 @@ public class GallaryFragment extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
 
-                mPictureLab.setPictureUrls(gson.fromJson(response.toString(),ArrayList.class));
+                mPictureLab.addPictureUrls(gson.fromJson(response.toString(),ArrayList.class));
                 Log.d("***","Size = "+mPictureLab.getPictureUrls().size());
                 setupAdapter();
 
